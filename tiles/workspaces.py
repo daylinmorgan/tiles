@@ -6,7 +6,7 @@ from .keys import keys
 from .settings import mod, terminal
 
 groups = [Group(i) for i in "12345678"] + [
-    Group("9", matches=[Match(wm_class=["Wavebox"])])
+    Group("9", matches=[Match(wm_class="Wavebox")])
 ]
 
 for i in groups:

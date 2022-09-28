@@ -1,5 +1,7 @@
 from collections import namedtuple
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable, List, Union
 
 from libqtile.config import EzKey, Key, KeyChord
 from libqtile.lazy import lazy
@@ -10,8 +12,21 @@ HOME = f"{Path.home()}"
 ROFI_BIN = f"{Path(__file__).parent.parent / 'rofi/bin'}"
 EZKEY_MAP = {"M": "Super", "A": "Alt", "C": "Control", "S": "Shift"}
 
-EzKeyDef = namedtuple("EzKeyDef", "combo cmd desc", defaults=(None,))
+# TODO: incoporate KeyDef into EzKeyDef dataclass
 KeyDef = namedtuple("KeyDef", "mod key cmd desc", defaults=(None,))
+
+
+@dataclass
+class EzKeyDef:
+    combo: str
+    cmd: Union[Callable, List[Callable]]
+    desc: str = ""
+
+    def ezkey(self):
+        if isinstance(self.cmd, list):
+            return EzKey(self.combo, *self.cmd, desc=self.desc)
+        else:
+            return EzKey(self.combo, self.cmd, desc=self.desc)
 
 
 def normalize_key(key):
@@ -50,7 +65,7 @@ def get_key_chord_help(mode, kc_def):
 def show_key_help(keys, chords):
     key_help = []
     for k in keys:
-        key_help.append(f"{get_ezkey_combo(k[0]):<25} {k[2]}")
+        key_help.append(f"{get_ezkey_combo(k.combo):<25} {k.desc}")
     for mode, kc_def in chords.items():
         key_help.extend(get_key_chord_help(mode, kc_def))
     return "\n".join(key_help)
@@ -135,12 +150,21 @@ main_key_defs = [
     EzKeyDef(
         "M-t",
         lazy.group["scratchpad"].dropdown_toggle("scratch term"),
-        "Show terminal scratchpad",
+        "show terminal scratchpad",
     ),
     EzKeyDef(
         "M-C-k",
         lazy.spawn(f"feh {HOME}/home/daylin/crkbd-keyboard.png"),
-        "Show crkbd keyboard layout",
+        "show crkbd keyboard layout",
+    ),
+    EzKeyDef(
+        "M-c",
+        [
+            lazy.window.enable_floating(),
+            lazy.window.set_size_floating(w=1600, h=1000),
+            lazy.window.center(),
+        ],
+        desc="make window centered and floating",
     ),
 ]
 
@@ -158,12 +182,17 @@ key_chords_defs = {
         "mods": [mod],
         "key": "r",
         "submappings": [
-            KeyDef([], "b", lazy.spawn(f"{ROFI_BIN}/bluetooth.sh"), "control bluetooth"),
+            KeyDef(
+                [], "b", lazy.spawn(f"{ROFI_BIN}/bluetooth.sh"), "control bluetooth"
+            ),
             KeyDef([], "p", lazy.spawn(f"{ROFI_BIN}/powermenu.sh"), "show powermenu"),
             KeyDef([], "w", lazy.spawn(f"{ROFI_BIN}/windows.sh"), "show window picker"),
             KeyDef([], "s", lazy.spawn(f"{ROFI_BIN}/ssh.sh"), "show ssh picker"),
             KeyDef(
-                [], "c", lazy.spawn(f"{ROFI_BIN}/colors.sh"), "show primary color picker"
+                [],
+                "c",
+                lazy.spawn(f"{ROFI_BIN}/colors.sh"),
+                "show primary color picker",
             ),
         ],
     }
@@ -188,13 +217,8 @@ rofi_key_bindings_help = KeyDef(
 )
 
 # generate keys
-main_keys = [EzKey(key.combo, key.cmd, desc=key.desc) for key in main_key_defs]
-system_keys = [
-    EzKey(
-        *key,
-    )
-    for key in system_key_defs
-]
+main_keys = [key.ezkey() for key in main_key_defs]
+system_keys = [key.ezkey() for key in system_key_defs]
 
 # add the keybinding helper
 key_chords_defs["rofi"]["submappings"].append(rofi_key_bindings_help)
