@@ -1,0 +1,171 @@
+;;  Widgets
+
+(defwidget launcher []
+  (box :class "box-launcher"
+    :orientation "h"
+    :hexpand false
+    (button :class "button-launcher"
+      :hexpand false
+      :onclick "${rofi-bin}/launcher.sh"
+      "")))
+
+(defwidget powermenu []
+  (box :class "box-launcher"
+    :orientation "h"
+    (button :class "button-launcher"
+       :onclick "${rofi-bin}/powermenu.sh"
+      "襤")))
+
+(defwidget volume []
+  (box :class "sysinfo"
+    :orientation "h"
+    :space-evenly "false"
+    (button
+      :onclick "bin/volume --toggle"
+      "${volume-icon} ")
+    (button
+      :onclick "bin/volume --inc"
+      :onrightclick "bin/volume --dec"
+      volume-level )))
+
+(defwidget clock []
+  (box :class "clock"
+    :orientation "h"
+    :space-evenly "false"
+    (label
+      :text clocktext
+      :limit-width 40 )))
+
+(defwidget battery []
+  (box :orientation "h"
+    (label :text '${EWW_BATTERY["BAT0"].status == "Discharging" ? "" : "ﮣ" }')
+    (label :text '${EWW_BATTERY["BAT0"].capacity}%' )))
+
+(defwidget ram []
+  (box :orientation "h"
+    (label :text " ${round(EWW_RAM.used_mem_perc, 0)}% ")))
+
+(defwidget cpu []
+  (box :orientation "h"
+    (label :text " ${round(EWW_CPU.avg, 0)}%")))
+
+(defwidget wifi []
+  (box :class "sysinfo"
+    :orientation "h"
+    (label :text '${ ssid=="ethernet" ? "" : ssid=="" ? "睊" : "直"}'
+      :tooltip ssid)))
+
+(defwidget bluetooth []
+  (box :class "sysinfo"
+    :orientation "h"
+    (button :onclick "${rofi-bin}/bluetooth.sh &"
+      bluetooth-icon)))
+
+(defwidget chord []
+  (box :class "sysinfo"
+         :visible "${wmstate.chord!=''}"
+    (label :text "  ${wmstate.chord}"
+      ))
+  )
+
+; Composite Widgets
+
+(defwidget sysinfo []
+  (box :class "sysinfo"
+    :orientation "h"
+    :space-evenly false
+    (ram)
+    (cpu)
+    (battery)
+  ))
+
+(defwidget ws-layout [screen]
+  (box :class "ws-layout"
+    :space-evenly false
+    :halign "start"
+    (box :class "ws-layout-icon" "")
+    (button :onclick "xdotool key 'super+Tab'"
+      "${wmstate.screens[screen].layout}")))
+      ; "layout (screen) ${screen}")))
+
+(defwidget workspaces [screen]
+  (box :class "workspaces panel"
+    :orientation "h"
+    :space-evenly false
+    :halign "start"
+    (workspaces-icons :screen screen)
+    ))
+
+(defwidget workspaces-icons [screen]
+  (box :class "workspaces"
+        :orientation "h"
+        :space-evenly true
+        :halign "center"
+        :valign "center"
+    (box
+      (for tag in "${wmstate.screens[screen].groups}"
+        (button
+          :class 'ws-button ws-button-${tag.name}
+                 ${tag.status=="active" ? "ws-button ws-button-active" :
+                 tag.status=="busy" ? "ws-button ws-button-open" :
+                 "ws-button-${tag.name}"}'
+          :onclick "xdotool key 'super+${tag.name}'"
+          "${tag.icon}")))))
+
+(defwidget sep []
+  (box :class "separator"
+    (label :text "|")))
+
+(defwidget sidestuff [?minimal]
+  (box :class "sidestuff panel"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (box :visible {minimal ? false : true}
+      :space-evenly false
+      (bluetooth)
+      (sep)
+      (wifi)
+      (sep)
+      (volume))
+    (sep)
+    (clock)
+    (powermenu)))
+
+(defwidget leftstuff [screen ?minimal]
+  (box :class "panel"
+    :orientation "h"
+    :halign "start"
+    :space-evenly false
+    (launcher)
+    (ws-layout :screen screen)
+    (box :visible {minimal ? false : true}
+      :space-evenly false
+      (sep)
+      (sysinfo)
+      (chord))))
+
+(defwidget leftstuffmin [screen]
+  (box :class "panel"
+    :orientation "h"
+    :halign "start"
+    :space-evenly false
+    (launcher)
+    (ws-layout :screen screen)))
+
+
+
+(defwidget sidestuffmin []
+  (box :class "sidestuff panel"
+    :orientation "h"
+    :space-evenly false
+    :halign "end"
+    (clock)
+    (powermenu)))
+
+(defwidget bar [screen ?minimal]
+  (centerbox :orientation "h"
+    :class "bar"
+    (leftstuff :screen screen :minimal minimal)
+    (workspaces :screen screen)
+    (sidestuff :minimal minimal)))

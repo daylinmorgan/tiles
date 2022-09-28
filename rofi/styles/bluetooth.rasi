@@ -1,0 +1,32 @@
+@import "default.rasi"
+@import "colors.rasi"
+
+mainbox {
+  padding: 12px;
+}
+
+inputbar {
+  background-color: @background;
+  border-color: @primary;
+  border: 2px;
+  border-radius: 4px;
+  padding: 8px 16px;
+  spacing: 8px;
+  children: [ prompt, entry ];
+}
+
+entry {
+  placeholder: "search";
+}
+
+listview {
+  margin: 12px 0 0;
+  lines: 8;
+  columns: 1;
+  fixed-height: false;
+}
+
+element {
+  padding: 8px 16px;
+  border-radius: 4px;
+}

@@ -1,0 +1,94 @@
+#!/bin/bash
+# https://raw.githubusercontent.com/adi1090x/widgets/main/eww/arin/scripts/volume
+# add commit info
+# Get Volume
+get_volume() {
+	status=$(amixer get Master | tail -n1 | grep -wo 'on')
+
+	if [[ $status == "on" ]]; then
+		volume=$(amixer get Master | tail -n1 | awk -F ' ' '{print $5}' | tr -d '[]')
+		echo "$volume"
+	else
+		echo "Mute"
+	fi
+}
+
+# Get icons
+get_icon() {
+	vol="$(get_volume)"
+	current="${vol%%%}"
+	status=$(amixer get Master | tail -n1 | grep -wo 'on')
+
+	if [[ $status == "on" ]]; then
+		echo "墳"
+	else
+		echo "婢"
+	fi
+}
+
+# Increase Volume
+inc_volume() {
+	amixer -Mq set Master,0 5%+ unmute
+}
+
+# Decrease Volume
+dec_volume() {
+	amixer -Mq set Master,0 5%- unmute
+}
+
+# Toggle Mute
+toggle_mute() {
+	status=$(amixer get Master | tail -n1 | grep -wo 'on')
+
+	if [[ $status == "on" ]]; then
+		amixer set Master toggle
+	else
+		amixer set Master toggle
+	fi
+}
+
+usage() {
+	cat <<HELP
+
+volume [option]
+
+--get      returns the current volume [default flag]
+--icon     returns icon based on current volume
+--inc      increments volume by 5%
+--dec      decreases volumbe by 5%
+--toggle   toggle's mute status of volume
+-h,--help  print this page and exit
+
+HELP
+	exit 0
+}
+
+[[ -z $@ ]] && get_volume
+
+for opt in "$@"; do
+	case $opt in
+	-h | --help)
+		usage
+		;;
+	--get)
+		get_volume
+		;;
+	--icon)
+		get_icon
+		;;
+	--inc)
+		inc_volume
+		;;
+	--dec)
+		dec_volume
+		;;
+	--toggle)
+		toggle_mute
+		;;
+	-* | --*)
+		echo "Invalid option: $opt"
+		usage
+		exit 1
+		;;
+	esac
+done

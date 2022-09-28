@@ -1,0 +1,46 @@
+@import "default.rasi"
+@import "colors.rasi"
+
+configuration {
+    disable-history: false;
+	sidebar-mode: false;
+	show-icons: false;
+}
+
+window {
+	width: 500px;
+}
+
+listview {
+    columns: 2;
+    lines: 1;
+    spacing: 12px;
+    cycle: true;
+    layout: vertical;
+}
+
+textbox-custom {
+    expand: false;
+    content: "Are you Sure?";
+    padding: 10px;
+    border: 2px;
+    border-radius: 10px;
+    border-color:@primary;
+}
+
+mainbox {
+    orientation: horizontal;
+    children: [ textbox-custom,listview ];
+    spacing: 20px;
+    margin: 20px;
+}
+
+element {
+    background-color: @background-light;
+    border-radius: 4px;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    margin: 10px 5px;
+}

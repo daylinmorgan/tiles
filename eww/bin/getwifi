@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\*/{if (NR!=1) {print $2}}'
+# nmcli con show --active
+get-network() {
+	nmcli --get-values name,type con show --active
+}
+wifi=$(get-network | grep "wireless")
+ethernet=$(get-network | grep "ethernet")
+if [[ -n $ethernet ]]; then
+	echo 'ethernet'
+elif [[ -n $wifi ]]; then
+	echo $wifi | sed 's/:.*//'
+fi

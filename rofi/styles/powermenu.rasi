@@ -1,0 +1,50 @@
+@import "default.rasi"
+@import "colors.rasi"
+
+configuration {
+  disable-history: false;
+  sidebar-mode: false;
+  show-icons: false;
+}
+
+window {
+  width: 800px;
+}
+
+prompt {
+  enabled: true;
+  padding: 10px;
+  background-color: @background-dark;
+  text-color: @accent;
+  border: 0px 2px 0px 2px;
+  border-radius: 10px;
+  border-color: @accent;
+}
+
+listview {
+  columns: 5;
+  lines: 1;
+  spacing: 12px;
+  cycle: true;
+  dynamic: true;
+  layout: vertical;
+}
+
+mainbox {
+  children: [ prompt, listview ];
+  spacing: 20px;
+  margin: 20px;
+}
+
+element {
+  background-color: @background-dark;
+  border-radius: 10px;
+}
+
+element-text {
+  font: @big-font;
+  background-color: inherit;
+  text-color: inherit;
+  horizontal-align: 0.5;
+  margin: 20px;
+}

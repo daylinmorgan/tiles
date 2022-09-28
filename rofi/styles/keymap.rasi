@@ -1,0 +1,48 @@
+@import "default.rasi"
+@import "colors.rasi"
+
+window {
+    width: 50%;
+  }
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt, entry];
+}
+
+prompt {
+  padding: 10px;
+  background-color: @primary;
+  text-color: @background;
+  font-weight: bold;
+  border: 0 1px 0 0;
+}
+
+textbox {
+  padding: 8px 16px;
+}
+
+entry {
+  padding: 10px;
+}
+
+listview {
+  cycle: false;
+  margin: 10 10 10 10;
+  scrollbar: false;
+}
+
+element {
+  border: 1;
+  padding: 5px;
+}
+
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+}
+
+element selected {
+  background-color: @primary;
+  text-color: @background;
+}

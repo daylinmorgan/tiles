@@ -1,0 +1,12 @@
+; Eww variables
+(defvar rofi-bin "~/.config/qtile/rofi/bin")
+
+; Listeners
+(deflisten wmstate :initial "{}" "tail -F /tmp/.qtile-state")
+
+; Pollers
+(defpoll clocktext :interval "10s" "date '+%d %b %I:%M %p'")
+(defpoll bluetooth-icon :interval "5s" "bin/bluetooth.sh")
+(defpoll volume-icon :interval "1s" "bin/volume --icon")
+(defpoll volume-level :interval "1s" "bin/volume --get")
+(defpoll ssid :interval "10s" "bin/getwifi")

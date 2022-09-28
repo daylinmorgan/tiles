@@ -1,0 +1,13 @@
+@import "~/.config/qtile/colors/colors.rasi"
+
+/* default colors */
+
+* {
+    background: #1E1E2E;
+    background-light:#313244;
+    background-dark: #11111b;
+    foreground: #cdd6f4;
+    foreground-light:#6c7086;
+    border-color: @bordercolor;
+    primary: var(theme-primary, #fab387);
+}
