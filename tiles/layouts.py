@@ -5,7 +5,7 @@ from .palettes import catppuccin as ctp
 from .settings import color
 
 defaults = dict(
-    border_width=3, border_focus=color["hex"], border_normal=ctp["overlay1"]
+    border_width=2, border_focus=color["hex"], border_normal=ctp["overlay1"]
 )
 
 layouts = [
