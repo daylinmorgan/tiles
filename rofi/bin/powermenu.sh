@@ -20,7 +20,7 @@ confirm_exit() {
 
 # Message
 msg() {
-	rofi -theme "$rofi_styles/message.rasi" -e "Available Options  -  yes / y / no / n"
+	rofi -theme "$styles/message.rasi" -e "Available Options  -  yes / y / no / n"
 }
 
 chosen="$(echo -e "$options" | $rofi_command -p "祥  $uptime " -dmenu -selected-row 2)"

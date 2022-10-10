@@ -7,7 +7,7 @@
     background-light:#313244;
     background-dark: #11111b;
     foreground: #cdd6f4;
-    foreground-light:#6c7086;
+    foreground-light: #6c7086;
     border-color: @bordercolor;
     primary: var(theme-primary, #fab387);
 }
