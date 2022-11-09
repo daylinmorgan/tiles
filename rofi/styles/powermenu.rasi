@@ -15,10 +15,10 @@ prompt {
   enabled: true;
   padding: 10px;
   background-color: @background-dark;
-  text-color: @accent;
+  text-color: @primary;
   border: 0px 2px 0px 2px;
   border-radius: 10px;
-  border-color: @accent;
+  border-color: @primary;
 }
 
 listview {

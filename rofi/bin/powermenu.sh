@@ -12,7 +12,7 @@ logout=""
 
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 
-uptime=$(uptime -p | sed -e 's/up //g')
+uptime=$(uptime | sed -e 's/up //g')
 
 confirm_exit() {
 	"$(dirname $(which $0))/confirm.sh"

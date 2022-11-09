@@ -9,8 +9,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from textwrap import dedent
 
-import tomli
-
 SCRIPTDIR = Path(__file__).parent
 
 
@@ -34,8 +32,10 @@ class Current:
             json.dump(self.__dict__, f)
 
 
-with (SCRIPTDIR / "config.toml").open("rb") as f:
-    config = tomli.load(f)
+# with (SCRIPTDIR / "config.toml").open("rb") as f:
+with (SCRIPTDIR / "config.json").open("rb") as f:
+    config = json.load(f)
+
 
 current = Current.get()
 pal = config["palette"]
