@@ -1,0 +1,31 @@
+{
+  "palette": {
+    "blue": "#96CDFB",
+    "flamingo": "#F2CDCD",
+    "green": "#ABE9B3",
+    "lavender": "#C9CBFF",
+    "maroon": "#E8A2AF",
+    "mauve": "#DDB6F2",
+    "peach": "#F8BD96",
+    "pink": "#F5C2E7",
+    "red": "#F28FAD",
+    "rosewater": "#F5E0DC",
+    "sky": "#89DCEB",
+    "teal": "#B5E8E0",
+    "yellow": "#FAE3B0"
+  },
+  "pkgs": {
+    "dunst": {
+      "file": "dunstrc",
+      "template": "[global]\nframe_color = \"{primary}\"\n"
+    },
+    "eww": {
+      "file": "colors.scss",
+      "template": "$accent: {primary};\n"
+    },
+    "rofi": {
+      "file": "colors.rasi",
+      "template": "* {{\n    theme-primary: {primary};\n}}\n"
+    }
+  }
+}

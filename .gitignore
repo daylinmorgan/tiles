@@ -169,4 +169,5 @@ wallpapers/
 colors/*
 !colors/colors.py
 !colors/config.toml
+!colors/config.json
 .task.mk
