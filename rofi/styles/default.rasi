@@ -15,7 +15,7 @@ window {
   width: 30%;
   background-color: @background;
   border: 2px;
-  border-color:@primary;
+  border-color:@theme-primary;
 }
 
 inputbar {

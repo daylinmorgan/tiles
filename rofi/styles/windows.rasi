@@ -1,0 +1,7 @@
+@import "default.rasi"
+@import "colors.rasi"
+@import "launcher.rasi"
+
+window {
+    width: 60%;
+}
