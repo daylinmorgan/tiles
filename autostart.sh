@@ -14,13 +14,12 @@ done
 
 sleep 1
 
-#  		--config "$PATH_TO_CONFIG/conf/picom.conf" \
-#  		--experimental-backends \
-
-#is-tool picom &&
-    #picom \
-  	#	-b \
-  		#&>/dev/null &
+is-tool picom &&
+    picom \
+ 		--config "$PATH_TO_CONFIG/conf/picom.conf" \
+ 		--experimental-backends \
+  	-b \
+  		&>/dev/null &
   
 
 is-tool dunst &&
@@ -34,8 +33,8 @@ is-tool feh &&
 		"$(find -L "${PATH_TO_CONFIG}/wallpapers/current" -type f)" &
 
 eww -c "$PATH_TO_CONFIG/eww daemon" &
-num_monitors=$(($(xrandr --listactivemonitors | wc -l) - 2))
-# num_monitors=$(echo "scale=0; $(qtile cmd-obj -o cmd -f screens | wc -l) / 10" | bc)
+# num_monitors=$(($(xrandr --listactivemonitors | wc -l) - 2))
+num_monitors=$(echo "scale=0; $(qtile cmd-obj -o cmd -f screens | wc -l) / 10" | bc)
 bars=''
 for index in $(seq 0 1 "$num_monitors"); do
 	bars+="bar$index "
