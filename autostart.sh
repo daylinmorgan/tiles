@@ -15,16 +15,14 @@ done
 sleep 1
 
 is-tool picom &&
-    picom \
- 		--config "$PATH_TO_CONFIG/conf/picom.conf" \
- 		--experimental-backends \
-  	-b \
-  		&>/dev/null &
-  
+	picom \
+		--config "$PATH_TO_CONFIG/conf/picom.conf" \
+		-b \
+		&>/dev/null &
 
 is-tool dunst &&
- 	cat "$PATH_TO_CONFIG/conf/dunstrc" \
- 		"$PATH_TO_CONFIG/colors/dunstrc" | dunst -conf - &
+	cat "$PATH_TO_CONFIG/conf/dunstrc" \
+		"$PATH_TO_CONFIG/colors/dunstrc" | dunst -conf - &
 
 is-tool feh &&
 	feh \
