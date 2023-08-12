@@ -171,3 +171,4 @@ colors/*
 !colors/config.toml
 !colors/config.json
 .task.mk
+.pdm-python

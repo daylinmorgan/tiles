@@ -80,7 +80,8 @@ def dummy_key_chord_keys(mode, key_defs):
             [],
             letter,
             lazy.spawn(
-                f"notify-send 'Key Error!' 'letter: {letter} not used in key chord mode: {mode}'"
+                "notify-send 'Key Error!' "
+                f"'letter: {letter} not used in key chord mode: {mode}'"
             ),
         )
         for letter in letters
@@ -211,7 +212,8 @@ rofi_key_bindings_help = KeyDef(
     lazy.spawn(
         "bash -c 'echo \""
         + show_key_help(main_key_defs + group_keys_def, key_chords_defs)
-        + f'" | rofi -dmenu -i -p "Keyboard shortcuts" -theme {HOME}/.config/qtile/rofi/styles/keymap.rasi\''
+        + '" | rofi -dmenu -i -p "Keyboard shortcuts"'
+        + f"-theme {HOME}/.config/qtile/rofi/styles/keymap.rasi'"
     ),
     "Show keybindings help",
 )

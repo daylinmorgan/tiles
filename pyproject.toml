@@ -1,0 +1,16 @@
+[project]
+authors = [
+    {name = "Daylin Morgan", email = "daylinmorgan@gmail.com"},
+]
+dependencies = []
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "ruff>=0.0.284",
+    "black>=23.7.0",
+]
+
+

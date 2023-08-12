@@ -40,7 +40,6 @@ class State:
             return layout
 
     def get_group_state(self, name, info, index):
-
         g_state = {"name": name}
         if info["screen"] is not None:
             if info["screen"] == index:
@@ -60,16 +59,13 @@ class State:
         return g_state
 
     def get_state(self, update={}):
-
         screens = qtile.cmd_screens()
         groups = qtile.cmd_groups()
         screen_state = {}
 
         for s in screens:
-
             screen_state[s["index"]] = {"groups": [], "layout": ""}
             for g, info in groups.items():
-
                 if g == "scratchpad":
                     continue
 

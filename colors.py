@@ -1,60 +1,13 @@
 #!/usr/bin/env python3
 
-import json
 import os
 import random
 import subprocess
 import sys
-from dataclasses import dataclass
-from pathlib import Path
 from textwrap import dedent
 
-SCRIPTDIR = Path(__file__).parent
 
-
-@dataclass
-class Current:
-    name: str
-    hex: str
-
-    @classmethod
-    def get(cls):
-        if (SCRIPTDIR / "colors.json").is_file():
-            with (SCRIPTDIR / "colors.json").open("r") as f:
-                return cls(**json.load(f))
-        else:
-            return cls("rosewater", "#F5E0DC")
-
-    def set(self, name, pal):
-        self.name = name
-        self.hex = pal[name]
-        with (SCRIPTDIR / "colors.json").open("w") as f:
-            json.dump(self.__dict__, f)
-
-
-# with (SCRIPTDIR / "config.toml").open("rb") as f:
-with (SCRIPTDIR / "config.json").open("rb") as f:
-    config = json.load(f)
-
-
-current = Current.get()
-pal = config["palette"]
-
-
-def write_style(template, outfile, colors):
-    with (SCRIPTDIR / outfile).open("w") as f:
-        f.write(template.format(**colors))
-
-
-def apply_style(color):
-    current.set(color, pal)
-
-    for info in config["pkgs"].values():
-        write_style(
-            template=info["template"],
-            outfile=info["file"],
-            colors={"primary": pal[color]},
-        )
+from tiles.colors import current, pal, apply_style
 
 
 # ? do i need to use sys.stdout?
@@ -72,7 +25,6 @@ def set_color(color, quit=False):
 
 
 def menu(selected):
-
     # add theme/config metadata to rofi
     echo(
         dedent(

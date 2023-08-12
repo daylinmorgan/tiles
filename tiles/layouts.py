@@ -21,5 +21,5 @@ floating_layout = Floating(
         Match(wm_class="org.jabref.gui.MainApplication"),
         Match(title="Geneious Prime"),
     ],
-    **defaults
+    **defaults,
 )

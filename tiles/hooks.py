@@ -4,14 +4,16 @@ from pathlib import Path
 from libqtile import hook
 
 from .state import State
+from .autostart import autostart
 
 state = State()
 HOME = f"{Path.home()}/"
 
 
 @hook.subscribe.startup
-def autostart():
-    subprocess.Popen([HOME + ".config/qtile/autostart.sh"])
+def at_start():
+    autostart()
+    # subprocess.Popen([HOME + ".config/qtile/autostart.sh"])
 
 
 @hook.subscribe.enter_chord
