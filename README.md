@@ -11,7 +11,6 @@
 - rofi
 - bluez-utils
 - python3
-  - (python3-tomli)
 
 ### Misc.
 
