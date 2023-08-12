@@ -5,6 +5,7 @@ from libqtile import qtile
 
 from .icons import icons
 
+
 class State:
     def __init__(self) -> None:
         self.logfile = Path("/tmp/.qtile-state")

@@ -1,8 +1,8 @@
 lint: lint.py lint.sh ## lint.*
 
 lint.py: ## run black/flake8
-	@black tiles/ colors.py
-	@pdm run ruff tiles colors.py
+	@pdm run black tiles/ colors.py
+	@pdm run ruff check tiles colors.py --fix
 
 lint.sh: ## run shfmt
 	@shfmt -w -s $(shell shfmt -f .)
