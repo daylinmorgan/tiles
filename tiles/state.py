@@ -3,19 +3,14 @@ from pathlib import Path
 
 from libqtile import qtile
 
-icon_file = Path(__file__).parent / "icons.json"
-
+from .icons import icons
 
 class State:
     def __init__(self) -> None:
         self.logfile = Path("/tmp/.qtile-state")
         self.logfile.touch()
-        self.icons = self._load_icons()
+        self.icons = icons
         self.layouts = {}
-
-    def _load_icons(self):
-        with icon_file.open("r") as f:
-            return json.load(f)
 
     def match_icon(self, window):
         for k, v in self.icons["icons"].items():

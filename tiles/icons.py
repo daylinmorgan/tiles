@@ -1,4 +1,4 @@
-{
+icons = {
   "icons": {
     "Alacritty": "",
     "Wavebox": "﫯",
