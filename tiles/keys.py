@@ -212,7 +212,7 @@ rofi_key_bindings_help = KeyDef(
     lazy.spawn(
         "bash -c 'echo \""
         + show_key_help(main_key_defs + group_keys_def, key_chords_defs)
-        + '" | rofi -dmenu -i -p "Keyboard shortcuts"'
+        + '" | rofi -dmenu -i -p "Keyboard shortcuts" '
         + f"-theme {HOME}/.config/qtile/rofi/styles/keymap.rasi'"
     ),
     "Show keybindings help",
