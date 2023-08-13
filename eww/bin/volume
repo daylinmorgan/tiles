@@ -20,9 +20,9 @@ get_icon() {
 	status=$(amixer get Master | tail -n1 | grep -wo 'on')
 
 	if [[ $status == "on" ]]; then
-		echo "墳"
+		echo "󰕾"
 	else
-		echo "婢"
+		echo "󰖁"
 	fi
 }
 

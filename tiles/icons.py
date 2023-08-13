@@ -1,13 +1,13 @@
 icons = {
     "icons": {
         "Alacritty": "",
-        "Wavebox": "﫯",
+        "Wavebox": "󰗰",
         "- NVIM": "",
         "[Running] - Oracle VM VirtualBox": "",
         "Visual Studio Code": "",
-        "Vivaldi": "爵",
+        "Vivaldi": "󰖟",
         "LibreOffice": "",
-        "Geneious Prime": "ﮂ",
+        "Geneious Prime": "󰚄",
         "Firefox": "",
         "- Wezterm": "",
     },

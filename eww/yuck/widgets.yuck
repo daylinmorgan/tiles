@@ -14,7 +14,7 @@
     :orientation "h"
     (button :class "button-launcher"
        :onclick "${rofi-bin}/powermenu.sh"
-      "襤")))
+      "󰐥")))
 
 (defwidget volume []
   (box :class "sysinfo"
@@ -38,12 +38,12 @@
 
 (defwidget battery []
   (box :orientation "h"
-    (label :text '${EWW_BATTERY["BAT0"].status == "Discharging" ? "" : "ﮣ" }')
+    (label :text '${EWW_BATTERY["BAT0"].status == "Discharging" ? "󰄌" : "󰚥" }')
     (label :text '${EWW_BATTERY["BAT0"].capacity}%' )))
 
 (defwidget ram []
   (box :orientation "h"
-    (label :text " ${round(EWW_RAM.used_mem_perc, 0)}% ")))
+    (label :text "󰀹 ${round(EWW_RAM.used_mem_perc, 0)}% ")))
 
 (defwidget cpu []
   (box :orientation "h"
@@ -52,7 +52,7 @@
 (defwidget wifi []
   (box :class "sysinfo"
     :orientation "h"
-    (label :text '${ ssid=="ethernet" ? "" : ssid=="" ? "睊" : "直"}'
+    (label :text '${ ssid=="ethernet" ? "󰈀" : ssid=="" ? "󰖪" : "󰖩"}'
       :tooltip ssid)))
 
 (defwidget bluetooth []
@@ -64,7 +64,7 @@
 (defwidget chord []
   (box :class "sysinfo"
          :visible "${wmstate.chord!=''}"
-    (label :text "  ${wmstate.chord}"
+    (label :text " 󰌌 ${wmstate.chord}"
       ))
   )
 

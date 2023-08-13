@@ -79,15 +79,16 @@ class Eww(Program):
     @staticmethod
     def _make_cmd():
         bars = ""
+        logger.warning(qtile.cmd_screens())
         for i in range(len(qtile.cmd_screens())):
             bars += f" bar{i}"
-        return f"eww -c {CFG_ROOT / 'eww'} open-many {bars}"
+        return f"eww -c {CFG_ROOT / 'eww'} open {bars} --debug"
 
 
 def autostart():
     auto_color()
 
-    programs = [Dunst(), Picom(), Feh(), Eww()]
+    programs = [Dunst(), Picom(), Eww()]
 
     for program in programs:
         if program.check():

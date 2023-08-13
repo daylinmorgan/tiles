@@ -8,7 +8,7 @@ shutdown=""
 reboot=""
 lock=""
 suspend=""
-logout=""
+logout="󰗼"
 
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 
@@ -23,7 +23,7 @@ msg() {
 	rofi -theme "$styles/message.rasi" -e "Available Options  -  yes / y / no / n"
 }
 
-chosen="$(echo -e "$options" | $rofi_command -p "祥  $uptime " -dmenu -selected-row 2)"
+chosen="$(echo -e "$options" | $rofi_command -p "󱎫  $uptime " -dmenu -selected-row 2)"
 case $chosen in
 $lock)
 	if [[ -f $HOME/bin/lock ]]; then
