@@ -203,6 +203,7 @@ key_chords_defs = {
                 lazy.spawn(f"{ROFI_BIN}/colors.sh"),
                 "show primary color picker",
             ),
+            KeyDef([],"q", lazy.spawn(f"{ROFI_BIN}/dqtile-cmd"), "run dqtile-cmd")
         ],
     }
 }

@@ -1,0 +1,38 @@
+@import "default.rasi"
+@import "colors.rasi"
+
+window {
+  border-radius: 4px;
+  location: center;
+  width: 60%;
+  background-color: @background;
+  border: 2px;
+  border-color:@theme-primary;
+}
+
+// TODO: add dotted item seperator?
+
+mainbox {
+    padding: 12px;
+}
+
+entry {
+    placeholder-color: @foreground-light;
+}
+
+listview {
+    lines: 20;
+    fixed-height: false;
+}
+
+
+element {
+    padding: 2px 16px;
+    spacing: 8px;
+    border-radius: 4px;
+}
+
+element-icon {
+    size: 1em;
+    vertical-align: 0.5;
+}
