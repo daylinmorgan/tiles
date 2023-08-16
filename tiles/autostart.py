@@ -18,7 +18,7 @@ class Program:
         self.name = self.__class__.__name__.lower()
 
     def kill(self):
-        run(["pkill", self.name], check=True)
+        run(["pkill", self.name])
 
     def check(self):
         exists = shutil.which(self.name)
