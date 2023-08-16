@@ -28,6 +28,11 @@ class EzKeyDef:
         else:
             return EzKey(self.combo, self.cmd, desc=self.desc)
 
+@lazy.function
+def change_layout_margin(qtile, adjustment):
+    if not qtile.current_layout.margin == 0 or adjustment>0:
+        qtile.current_layout.margin += adjustment
+
 
 def normalize_key(key):
     return key.replace("<", "").replace(">", "").capitalize() if len(key) > 1 else key
@@ -106,7 +111,6 @@ def make_key_chord(key_chord_dict):
         )
     return key_chords
 
-
 main_key_defs = [
     # focus / layout
     EzKeyDef("M-h", lazy.prev_screen(), "move focus to prev screen"),
@@ -115,6 +119,9 @@ main_key_defs = [
     EzKeyDef("M-k", lazy.layout.up(), "move focus up"),
     EzKeyDef("M-<space>", lazy.layout.next(), "move window focus to other window"),
     EzKeyDef("M-<Tab>", lazy.next_layout(), "toggle between layouts"),
+    EzKeyDef("M-g", change_layout_margin(adjustment=-5), 'decrease margin by 5'),
+    EzKeyDef("M-S-g", change_layout_margin(adjustment=5), 'increase margin by 5'),
+
     # windows
     EzKeyDef("M-f", lazy.window.toggle_fullscreen(), "make window fullscreen"),
     EzKeyDef("M-S-f", lazy.window.toggle_floating(), "toggle floating window"),
@@ -132,6 +139,7 @@ main_key_defs = [
     EzKeyDef("M-o", lazy.layout.maximize(), "maximize windows"),
     EzKeyDef("M-S-<space>", lazy.layout.flip(), "flip window"),
     EzKeyDef("M-S-q", lazy.window.kill(), "Kill focused window"),
+
     # Qtile
     EzKeyDef("M-S-r", lazy.restart(), "restart qtile"),
     EzKeyDef("M-C-r", lazy.reload_config(), "reload the config"),

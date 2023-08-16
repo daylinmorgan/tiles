@@ -4,12 +4,13 @@ from libqtile.layout import Floating, Max, MonadTall
 from .palettes import catppuccin as ctp
 from .settings import color
 
+
 defaults = dict(
     border_width=2, border_focus=color["hex"], border_normal=ctp["overlay1"]
 )
 
 layouts = [
-    MonadTall(margin=5, **defaults),
+    MonadTall(margin=15, **defaults),
     Max(**defaults),
 ]
 
@@ -23,3 +24,5 @@ floating_layout = Floating(
     ],
     **defaults,
 )
+
+

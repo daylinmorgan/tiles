@@ -10,5 +10,6 @@ except FileNotFoundError:
     color = {"name": "mauve", "hex": "#DDB6F2"}
 
 mod = "mod4"
-terminal = guess_terminal(["wezterm", "alacritty"])
+# terminal = guess_terminal(["wezterm", "alacritty"])
+terminal = guess_terminal(["alacritty"])
 cursor_warp = True
