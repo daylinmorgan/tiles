@@ -38,8 +38,8 @@
 
 (defwidget battery []
   (box :orientation "h"
-    (label :text '${EWW_BATTERY["BAT0"].status == "Discharging" ? "󰄌" : "󰚥" }')
-    (label :text '${EWW_BATTERY["BAT0"].capacity}%' )))
+    (label :text '${EWW_BATTERY["BAT0"].status == "Discharging" ? "󰄌" : "󰚥"} ${EWW_BATTERY["BAT0"].capacity}%')
+    ))
 
 (defwidget ram []
   (box :orientation "h"
@@ -47,7 +47,7 @@
 
 (defwidget cpu []
   (box :orientation "h"
-    (label :text " ${round(EWW_CPU.avg, 0)}%")))
+    (label :text " ${round(EWW_CPU.avg, 0)}% ")))
 
 (defwidget wifi []
   (box :class "sysinfo"

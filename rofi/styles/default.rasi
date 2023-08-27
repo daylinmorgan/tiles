@@ -1,6 +1,6 @@
 * {
-  small-font: "MonoLisa Nerd Font 12";
-  big-font: "MonoLisa Nerd Font 50";
+  small-font: "FiraCode Nerd Font Propo 12";
+  big-font: "FiraCode Nerd Font Propo 50";
   font:  @small-font;
   background-color: transparent;
   text-color: @foreground;
