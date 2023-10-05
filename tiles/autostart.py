@@ -1,10 +1,10 @@
-from subprocess import Popen, PIPE, run
-from pathlib import Path
 import shlex
 import shutil
+from pathlib import Path
+from subprocess import PIPE, Popen, run
 
-from libqtile.log_utils import logger
 from libqtile import qtile
+from libqtile.log_utils import logger
 
 from .colors import auto_color
 

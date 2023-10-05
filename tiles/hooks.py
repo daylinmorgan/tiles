@@ -3,8 +3,8 @@ from pathlib import Path
 
 from libqtile import hook
 
-from .state import State
 from .autostart import autostart
+from .state import State
 
 state = State()
 HOME = f"{Path.home()}/"
