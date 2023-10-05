@@ -8,13 +8,12 @@ from libqtile.lazy import lazy
 
 from .settings import mod, terminal
 
-HOME = f"{Path.home()}"
-ROFI_BIN = f"{Path(__file__).parent.parent / 'rofi/bin'}"
+HOME = Path.home()
+ROFI_BIN = Path(__file__).parent.parent / 'rofi/bin'
 EZKEY_MAP = {"M": "Super", "A": "Alt", "C": "Control", "S": "Shift"}
 
 # TODO: incoporate KeyDef into EzKeyDef dataclass
 KeyDef = namedtuple("KeyDef", "mod key cmd desc", defaults=(None,))
-
 
 @dataclass
 class EzKeyDef:
@@ -92,6 +91,12 @@ def dummy_key_chord_keys(mode, key_defs):
         for letter in letters
     ]
 
+def spawn(cmd):
+    """spawn that converts paths to strings"""
+    if isinstance(cmd, Path):
+        return lazy.spawn(str(cmd))
+    else:
+        return lazy.spawn(cmd)
 
 def make_key_chord(key_chord_dict):
     key_chords = []
@@ -141,14 +146,14 @@ main_key_defs = [
     EzKeyDef("M-C-r", lazy.reload_config(), "reload the config"),
     EzKeyDef("M-S-x", lazy.shutdown(), "shutdown qtile"),
     # Programs
-    EzKeyDef("M-S-<Return>", lazy.spawn(terminal), "launch terminal"),
-    EzKeyDef("M-p", lazy.spawn(f"{ROFI_BIN}/launcher.sh"), "show app launcher"),
-    EzKeyDef("M-S-e", lazy.spawn("thunar"), "launch thunar"),
-    EzKeyDef("M-C-l", lazy.spawn(f"{HOME}/bin/lock"), "lock the screen"),
-    EzKeyDef("M-s", lazy.spawn("flameshot gui"), "take screenshot"),
+    EzKeyDef("M-S-<Return>", spawn(terminal), "launch terminal"),
+    EzKeyDef("M-p", spawn(ROFI_BIN / "launcher.sh"), "show app launcher"),
+    EzKeyDef("M-S-e", spawn("thunar"), "launch thunar"),
+    EzKeyDef("M-C-l", spawn(HOME / "bin/lock"), "lock the screen"),
+    EzKeyDef("M-s", spawn("flameshot gui"), "take screenshot"),
     EzKeyDef(
         "M-S-s",
-        lazy.spawn("flameshot screen -n 0"),
+        spawn("flameshot screen -n 0"),
         "take screenshot of full screen",
     ),
     # Scratchpad
@@ -156,11 +161,6 @@ main_key_defs = [
         "M-t",
         lazy.group["scratchpad"].dropdown_toggle("scratch term"),
         "show terminal scratchpad",
-    ),
-    EzKeyDef(
-        "M-C-k",
-        lazy.spawn(f"feh {HOME}/home/daylin/crkbd-keyboard.png"),
-        "show crkbd keyboard layout",
     ),
     EzKeyDef(
         "M-c",
@@ -174,11 +174,11 @@ main_key_defs = [
 ]
 
 system_key_defs = [
-    EzKeyDef("<XF86AudioLowerVolume>", lazy.spawn("amixer set 'Master' 5%-")),
-    EzKeyDef("<XF86AudioRaiseVolume>", lazy.spawn("amixer set 'Master' 5%+")),
-    EzKeyDef("<XF86AudioMute>", lazy.spawn("amixer sset 'Master' toggle")),
-    EzKeyDef("<XF86MonBrightnessUp>", lazy.spawn("light -A 5")),
-    EzKeyDef("<XF86MonBrightnessDown>", lazy.spawn("light -U 5")),
+    EzKeyDef("<XF86AudioLowerVolume>", spawn("amixer set 'Master' 5%-")),
+    EzKeyDef("<XF86AudioRaiseVolume>", spawn("amixer set 'Master' 5%+")),
+    EzKeyDef("<XF86AudioMute>", spawn("amixer sset 'Master' toggle")),
+    EzKeyDef("<XF86MonBrightnessUp>", spawn("light -A 5")),
+    EzKeyDef("<XF86MonBrightnessDown>", spawn("light -U 5")),
 ]
 
 
@@ -188,18 +188,18 @@ key_chords_defs = {
         "key": "r",
         "submappings": [
             KeyDef(
-                [], "b", lazy.spawn(f"{ROFI_BIN}/bluetooth.sh"), "control bluetooth"
+                [], "b", spawn(ROFI_BIN / "bluetooth.sh"), "control bluetooth"
             ),
-            KeyDef([], "p", lazy.spawn(f"{ROFI_BIN}/powermenu.sh"), "show powermenu"),
-            KeyDef([], "w", lazy.spawn(f"{ROFI_BIN}/windows.sh"), "show window picker"),
-            KeyDef([], "s", lazy.spawn(f"{ROFI_BIN}/ssh.sh"), "show ssh picker"),
+            KeyDef([], "p", spawn(ROFI_BIN/"powermenu.sh"), "show powermenu"),
+            KeyDef([], "w", spawn(ROFI_BIN/"windows.sh"), "show window picker"),
+            KeyDef([], "s", spawn(ROFI_BIN/"ssh.sh"), "show ssh picker"),
             KeyDef(
                 [],
                 "c",
-                lazy.spawn(f"{ROFI_BIN}/colors.sh"),
+                spawn(ROFI_BIN/"colors.sh"),
                 "show primary color picker",
             ),
-            KeyDef([],"q", lazy.spawn(f"{ROFI_BIN}/dqtile-cmd"), "run dqtile-cmd")
+            KeyDef([],"q", spawn(ROFI_BIN/"dqtile-cmd"), "run dqtile-cmd")
         ],
     }
 }
