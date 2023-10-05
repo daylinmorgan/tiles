@@ -56,4 +56,4 @@ groups += groups + [
         ],
     )
 ]
-screens = [Screen(bar.Gap(45)) for _ in range(len(qtile.cmd_screens()))]
+screens = [Screen(bar.Gap(45)) for _ in range(len(qtile.screens))]

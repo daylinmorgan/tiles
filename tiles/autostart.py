@@ -79,8 +79,7 @@ class Eww(Program):
     @staticmethod
     def _make_cmd():
         bars = ""
-        logger.warning(qtile.cmd_screens())
-        for i in range(len(qtile.cmd_screens())):
+        for i in range(len(qtile.screens)):
             bars += f" bar{i}"
         return f"eww -c {CFG_ROOT / 'eww'} open-many {bars} --debug"
 

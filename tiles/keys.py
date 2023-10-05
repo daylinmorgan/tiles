@@ -125,10 +125,6 @@ main_key_defs = [
     # windows
     EzKeyDef("M-f", lazy.window.toggle_fullscreen(), "make window fullscreen"),
     EzKeyDef("M-S-f", lazy.window.toggle_floating(), "toggle floating window"),
-    EzKeyDef("M-S-h", lazy.layout.shuffle_left(), "move window to the left"),
-    EzKeyDef("M-S-l", lazy.layout.shuffle_right(), "move window to the right"),
-    EzKeyDef("M-S-j", lazy.layout.shuffle_down(), "move window down"),
-    EzKeyDef("M-S-k", lazy.layout.shuffle_up(), "move window up"),
     EzKeyDef("M-S-h", lazy.layout.swap_left(), "swap window left"),
     EzKeyDef("M-S-l", lazy.layout.swap_right(), "swap window right"),
     EzKeyDef("M-S-j", lazy.layout.shuffle_down(), "shuffle window down"),

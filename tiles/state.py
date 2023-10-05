@@ -55,8 +55,8 @@ class State:
         return g_state
 
     def get_state(self, update={}):
-        screens = qtile.cmd_screens()
-        groups = qtile.cmd_groups()
+        screens = qtile.get_screens()
+        groups = qtile.get_groups()
         screen_state = {}
 
         for s in screens:
