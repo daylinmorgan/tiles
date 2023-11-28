@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # https://raw.githubusercontent.com/adi1090x/widgets/main/eww/arin/scripts/volume
 # add commit info
 # Get Volume
