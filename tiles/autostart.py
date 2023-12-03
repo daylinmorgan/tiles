@@ -66,7 +66,7 @@ class Feh(Program):
         files = []
         if wall_path.is_file():
             files.append(wall_path)
-        else:
+        elif wall_path.is_dir():
             files.extend(list(wall_path.iterdir()))
         return map(str, files)
 
