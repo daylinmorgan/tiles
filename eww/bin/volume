@@ -2,11 +2,12 @@
 # https://raw.githubusercontent.com/adi1090x/widgets/main/eww/arin/scripts/volume
 # add commit info
 # Get Volume
-get_volume() {
-	status=$(amixer get Master | tail -n1 | grep -wo 'on')
 
-	if [[ $status == "on" ]]; then
-		volume=$(amixer get Master | tail -n1 | awk -F ' ' '{print $5}' | tr -d '[]')
+get_volume() {
+  status=$(pamixer --get-mute)
+
+	if [[ $status == "false" ]]; then
+		volume=$(pamixer --get-volume-human)
 		echo "$volume"
 	else
 		echo "Mute"
@@ -16,35 +17,27 @@ get_volume() {
 # Get icons
 get_icon() {
 	vol="$(get_volume)"
-	current="${vol%%%}"
-	status=$(amixer get Master | tail -n1 | grep -wo 'on')
 
-	if [[ $status == "on" ]]; then
-		echo "󰕾"
-	else
+	if [[ $vol == "Mute" ]]; then
 		echo "󰖁"
+	else
+		echo "󰕾"
 	fi
 }
 
 # Increase Volume
 inc_volume() {
-	amixer -Mq set Master,0 5%+ unmute
+  pamixer --increase 5
 }
 
 # Decrease Volume
 dec_volume() {
-	amixer -Mq set Master,0 5%- unmute
+  pamixer --decrease 5
 }
 
 # Toggle Mute
 toggle_mute() {
-	status=$(amixer get Master | tail -n1 | grep -wo 'on')
-
-	if [[ $status == "on" ]]; then
-		amixer set Master toggle
-	else
-		amixer set Master toggle
-	fi
+  pamixer --toggle-mute
 }
 
 usage() {
@@ -63,7 +56,7 @@ HELP
 	exit 0
 }
 
-[[ -z $@ ]] && get_volume
+[[ -z "$*" ]] && get_volume
 
 for opt in "$@"; do
 	case $opt in
@@ -85,10 +78,9 @@ for opt in "$@"; do
 	--toggle)
 		toggle_mute
 		;;
-	-* | --*)
+	-*)
 		echo "Invalid option: $opt"
 		usage
-		exit 1
 		;;
 	esac
 done
