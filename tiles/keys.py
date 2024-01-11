@@ -177,9 +177,9 @@ main_key_defs = [
 ]
 
 system_key_defs = [
-    EzKeyDef("<XF86AudioLowerVolume>", spawn("amixer set 'Master' 5%-")),
-    EzKeyDef("<XF86AudioRaiseVolume>", spawn("amixer set 'Master' 5%+")),
-    EzKeyDef("<XF86AudioMute>", spawn("amixer sset 'Master' toggle")),
+    EzKeyDef("<XF86AudioLowerVolume>", spawn("pamixer --decrease 5")),
+    EzKeyDef("<XF86AudioRaiseVolume>", spawn("pamixer --increase 5")),
+    EzKeyDef("<XF86AudioMute>", spawn("pamixer --toggle-mute")),
     EzKeyDef("<XF86MonBrightnessUp>", spawn("light -A 5")),
     EzKeyDef("<XF86MonBrightnessDown>", spawn("light -U 5")),
 ]
