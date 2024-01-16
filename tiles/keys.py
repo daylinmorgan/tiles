@@ -152,7 +152,7 @@ main_key_defs = [
     EzKeyDef("M-S-<Return>", spawn(terminal), "launch terminal"),
     EzKeyDef("M-p", spawn(ROFI_BIN / "launcher.sh"), "show app launcher"),
     EzKeyDef("M-S-e", spawn("thunar"), "launch thunar"),
-    EzKeyDef("M-C-l", spawn(HOME / "bin/lock"), "lock the screen"),
+    EzKeyDef("M-C-l", spawn("lock"), "lock the screen"),
     EzKeyDef("M-s", spawn("flameshot gui"), "take screenshot"),
     EzKeyDef(
         "M-S-s",
@@ -180,8 +180,8 @@ system_key_defs = [
     EzKeyDef("<XF86AudioLowerVolume>", spawn("pamixer --decrease 5")),
     EzKeyDef("<XF86AudioRaiseVolume>", spawn("pamixer --increase 5")),
     EzKeyDef("<XF86AudioMute>", spawn("pamixer --toggle-mute")),
-    EzKeyDef("<XF86MonBrightnessUp>", spawn("light -A 5")),
-    EzKeyDef("<XF86MonBrightnessDown>", spawn("light -U 5")),
+    EzKeyDef("<XF86MonBrightnessUp>", spawn("brightnessctl set +5%")),
+    EzKeyDef("<XF86MonBrightnessDown>", spawn("brightnessctl set 5%-")),
 ]
 
 
