@@ -81,7 +81,7 @@ class Eww(Program):
         bars = ""
         for i in range(len(qtile.screens)):
             bars += f" bar{i}"
-        return f"eww -c {CFG_ROOT / 'eww'} open-many {bars} --debug"
+        return f"eww -c {CFG_ROOT / 'eww'} open-many {bars}"
 
 
 def autostart():
